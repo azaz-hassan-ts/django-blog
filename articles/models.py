@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.deletion import CASCADE
 
 # Create your models here.
 class Article(models.Model):
@@ -6,6 +8,8 @@ class Article(models.Model):
     slug = models.SlugField()
     body = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
+    thumb = models.ImageField(default='default.png', blank=True)
+    author = models.ForeignKey(User,default=None, on_delete=CASCADE)
 
     def __str__(self):
         return self.title
